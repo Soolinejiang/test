@@ -24,13 +24,30 @@
     </style>
 </head>
 <body>
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="bgm.mp3" type="audio/mpeg">
+        浏览器不支持音频播放
+    
+
     <div>
         <canvas id="game" width="800" height="600"></canvas>
-        <div class="info">WASD移动 Q/E旋转 Shift奔跑 | Sooline sauce出品</div>
+        <div class="info">WASD移动 Q/E旋转 Shift奔跑 | Sooline sauce出品 | 点击画面开启BGM</div>
     </div>
     <script>
         const canvas = document.getElementById("game");
         const ctx = canvas.getContext("2d");
+        const bgMusic = document.getElementById("bgMusic");
+        let bgmStarted = false;
+
+        // 点击画布触发背景音乐（浏览器必须用户交互才能播放音频）
+        canvas.addEventListener('click', () => {
+            if(!bgmStarted){
+                bgMusic.play();
+                bgmStarted = true;
+            }
+        });
+
         const PI = Math.PI;
         // 区块系统
         const CHUNK_SIZE = 32;
